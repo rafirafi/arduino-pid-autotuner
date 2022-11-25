@@ -5,10 +5,6 @@
 #ifndef PIDAUTOTUNER_H
 #define PIDAUTOTUNER_H
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
 class PIDAutotuner {
   public:
     // Constants for Ziegler-Nichols tuning mode

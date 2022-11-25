@@ -4,6 +4,10 @@
 
 #include "pidautotuner.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 PIDAutotuner::PIDAutotuner() {
 }
 
@@ -131,8 +135,8 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     tu /= 1000000.;
     // Calculate gains
     kp = kpConstant * ku;
-    ki = (kp / (tiConstant * tu));
-    kd = (tdConstant * kp * tu);
+    ki = kp / (tiConstant * tu);
+    kd = tdConstant * kp * tu;
 
     // Average all gains after the first two cycles
     if (i >= 2) {
