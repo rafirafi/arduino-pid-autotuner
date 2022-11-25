@@ -12,11 +12,6 @@ void PIDAutotuner::setTargetInputValue(float target) {
   targetInputValue = target;
 }
 
-// Set loop interval
-void PIDAutotuner::setLoopInterval(long interval) {
-  loopInterval = interval;
-}
-
 // Set output range
 void PIDAutotuner::setOutputRange(float min, float max) {
   minOutput = min;
@@ -134,8 +129,8 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
 
     // Calculate gains
     kp = kpConstant * ku;
-    ki = (kp / (tiConstant * tu)) * loopInterval;
-    kd = (tdConstant * kp * tu) / loopInterval;
+    ki = (kp / (tiConstant * tu));
+    kd = (tdConstant * kp * tu);
 
     // Average all gains after the first two cycles
     if (i > 1) {

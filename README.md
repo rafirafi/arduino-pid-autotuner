@@ -24,10 +24,6 @@ void setup() {
     // value at the middle of the range.
     tuner.setTargetInputValue(targetInputValue);
 
-    // Set the loop interval in microseconds
-    // This must be the same as the interval the PID control loop will run at
-    tuner.setLoopInterval(loopInterval);
-
     // Set the output range
     // These are the minimum and maximum possible output values of whatever you are
     // using to control the system (Arduino analogWrite, for example, is 0-255)
@@ -47,7 +43,6 @@ void setup() {
     long microseconds;
     while (!tuner.isFinished()) {
 
-        // This loop must run at the same speed as the PID control loop being tuned
         long prevMicroseconds = microseconds;
         microseconds = micros();
 
@@ -62,7 +57,6 @@ void setup() {
         // incorrect.
         doSomethingToSetOutput(output);
 
-        // This loop must run at the same speed as the PID control loop being tuned
         while (micros() - microseconds < loopInterval) delayMicroseconds(1);
     }
 
