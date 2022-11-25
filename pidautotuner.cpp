@@ -127,6 +127,8 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
       tdConstant = 0.33;
     }
 
+    // Convert oscillation period to seconds
+    tu /= 1000000.;
     // Calculate gains
     kp = kpConstant * ku;
     ki = (kp / (tiConstant * tu));
