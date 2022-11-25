@@ -25,7 +25,7 @@ void PIDAutotuner::setZNMode(ZNMode zn) {
 
 // Set tuning cycles
 void PIDAutotuner::setTuningCycles(int tuneCycles) {
-  cycles = tuneCycles;
+  cycles = tuneCycles < 3 ? 3 : tuneCycles;
 }
 
 // Initialize all variables before loop
@@ -135,7 +135,7 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     kd = (tdConstant * kp * tu);
 
     // Average all gains after the first two cycles
-    if (i > 1) {
+    if (i >= 2) {
       pAverage += kp;
       iAverage += ki;
       dAverage += kd;
@@ -152,9 +152,9 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
   if (i >= cycles) {
     output = false;
     outputValue = minOutput;
-    kp = pAverage / (i - 1);
-    ki = iAverage / (i - 1);
-    kd = dAverage / (i - 1);
+    kp = pAverage / (i - 2);
+    ki = iAverage / (i - 2);
+    kd = dAverage / (i - 2);
   }
 
   return outputValue;
