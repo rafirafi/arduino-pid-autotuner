@@ -159,9 +159,17 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
 }
 
 // Get PID constants after tuning
-float PIDAutotuner::getKp() { return kp; };
-float PIDAutotuner::getKi() { return ki; };
-float PIDAutotuner::getKd() { return kd; };
+float PIDAutotuner::getKp() {
+  return kp;
+}
+
+float PIDAutotuner::getKi() {
+  return ki;
+}
+
+float PIDAutotuner::getKd() {
+  return kd;
+}
 
 // Is the tuning loop finished?
 bool PIDAutotuner::isFinished() {
