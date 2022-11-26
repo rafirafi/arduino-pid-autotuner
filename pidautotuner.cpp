@@ -4,8 +4,10 @@
 
 #include "pidautotuner.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
+#ifdef ARDUINO
+#include <Arduino.h>
+#else
+#define PI 3.14159265358979323846
 #endif
 
 PIDAutotuner::PIDAutotuner() {
@@ -94,7 +96,7 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     // Formula given is Ku = 4d / πa
     // d is the amplitude of the output signal
     // a is the amplitude of the input signal
-    float ku = (4.0 * ((maxOutput - minOutput) / 2.0)) / (M_PI * (max - min) / 2.0);
+    float ku = (4.0 * ((maxOutput - minOutput) / 2.0)) / (PI * (max - min) / 2.0);
 
     // Calculate Tu (period of output oscillations)
     float tu = tLow + tHigh;
