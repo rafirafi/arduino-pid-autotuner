@@ -40,7 +40,7 @@ void PIDAutotuner::startTuningLoop(unsigned long us) {
   output = true; // Current output state
   outputValue = maxOutput;
   t1 = t2 = us; // Times used for calculating period
-  microseconds = tHigh = tLow = 0; // More time variables
+  tHigh = tLow = 0; // More time variables
   max = -1000000000000; // Max input
   min = 1000000000000; // Min input
   pAverage = iAverage = dAverage = 0;
@@ -68,11 +68,6 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
   if (isFinished()) {
     return minOutput;
   }
-
-  // Calculate time delta
-  //long prevMicroseconds = microseconds;
-  microseconds = us;
-  //float deltaT = microseconds - prevMicroseconds;
 
   // Calculate max and min
   max = (max > input) ? max : input;

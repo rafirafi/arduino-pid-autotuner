@@ -53,7 +53,7 @@ class PIDAutotuner {
     int i;
     bool output;
     float outputValue;
-    long microseconds, t1, t2, tHigh, tLow;
+    long t1, t2, tHigh, tLow;
     float max, min;
     float pAverage, iAverage, dAverage;
 
