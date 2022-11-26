@@ -98,6 +98,9 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     // a is the amplitude of the input signal
     float ku = (4.0 * ((maxOutput - minOutput) / 2.0)) / (PI * (max - min) / 2.0);
 
+    // Reset minimum
+    min = targetInputValue;
+
     // Calculate Tu (period of output oscillations) in seconds
     float tu = float(tLow + tHigh) / 1000000.;
 
@@ -147,9 +150,6 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
       iAverage += ki;
       dAverage += kd;
     }
-
-    // Reset minimum
-    min = targetInputValue;
   }
 
   // If loop is done, disable output and calculate averages
