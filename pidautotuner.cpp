@@ -98,8 +98,8 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     // a is the amplitude of the input signal
     float ku = (4.0 * ((maxOutput - minOutput) / 2.0)) / (PI * (max - min) / 2.0);
 
-    // Calculate Tu (period of output oscillations)
-    float tu = tLow + tHigh;
+    // Calculate Tu (period of output oscillations) in seconds
+    float tu = float(tLow + tHigh) / 1000000.;
 
     // How gains are calculated
     // PID control algorithm needs Kp, Ki, and Kd
@@ -133,8 +133,6 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
       tdConstant = 0.33;
     }
 
-    // Convert oscillation period to seconds
-    tu /= 1000000.;
     // Calculate gains
     kp = kpConstant * ku;
     ki = kp / (tiConstant * tu);
