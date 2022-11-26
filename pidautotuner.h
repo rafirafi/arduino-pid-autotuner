@@ -17,7 +17,7 @@ class PIDAutotuner {
     PIDAutotuner();
 
     // Configure parameters for PID tuning
-    // See README for more details - https://github.com/jackw01/arduino-pid-autotuner/blob/master/README.md
+    // See README for more details
     // targetInputValue: the target value to tune to
     // outputRange: min and max values of the output that can be used to control the system (0, 255 for analogWrite)
     // znMode: Ziegler-Nichols tuning mode (znModeBasicPID, znModeLessOvershoot, znModeNoOvershoot)
@@ -31,7 +31,7 @@ class PIDAutotuner {
     void startTuningLoop(unsigned long us);
 
     // Automatically tune PID
-    // See README for more details - https://github.com/jackw01/arduino-pid-autotuner/blob/master/README.md
+    // See README for more details
     float tunePID(float input, unsigned long us);
 
     // Get results of most recent tuning
