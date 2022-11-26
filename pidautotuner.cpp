@@ -65,6 +65,10 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
   //  * Use this and the period of oscillation to calculate PID gains using the
   //      Ziegler-Nichols method
 
+  if (isFinished()) {
+    return minOutput;
+  }
+
   // Calculate time delta
   //long prevMicroseconds = microseconds;
   microseconds = us;
@@ -150,15 +154,14 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
       iAverage += ki;
       dAverage += kd;
     }
-  }
 
-  // If loop is done, disable output and calculate averages
-  if (i >= cycles) {
-    output = false;
-    outputValue = minOutput;
-    kp = pAverage / (i - 2);
-    ki = iAverage / (i - 2);
-    kd = dAverage / (i - 2);
+    // If loop is done, disable output and calculate averages
+    if (i == cycles) {
+      outputValue = minOutput;
+      kp = pAverage / (i - 2);
+      ki = iAverage / (i - 2);
+      kd = dAverage / (i - 2);
+    }
   }
 
   return outputValue;
