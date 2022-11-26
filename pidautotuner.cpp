@@ -138,8 +138,11 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
     ki = kp / (tiConstant * tu);
     kd = tdConstant * kp * tu;
 
+    // Increment cycle count
+    i++;
+
     // Average all gains after the first two cycles
-    if (i >= 2) {
+    if (i > 2) {
       pAverage += kp;
       iAverage += ki;
       dAverage += kd;
@@ -147,9 +150,6 @@ float PIDAutotuner::tunePID(float input, unsigned long us) {
 
     // Reset minimum
     min = targetInputValue;
-
-    // Increment cycle count
-    i ++;
   }
 
   // If loop is done, disable output and calculate averages
